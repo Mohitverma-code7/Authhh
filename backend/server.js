@@ -31,6 +31,8 @@ app.use(
   })
 );
 
+
+
 // REGISTER
 app.post("/users/register", async (req, res) => {
   try {
@@ -91,6 +93,14 @@ app.post("/users/logout", async (req, res) => {
 
 app.get("/", (req, res) => {
   res.send("Auth server is running 🚀");
+});
+
+
+app.get("/debug", (req, res) => {
+  res.json({
+    cookie: req.headers.cookie || "NO COOKIE",
+    headers: req.headers,
+  });
 });
 
 app.listen(PORT, () => {
