@@ -3,34 +3,77 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .modern-card {
-    @apply bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl rounded-3xl p-8;
-  }
-  .modern-button {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 transform;
-  }
-  .modern-button-secondary {
-    @apply bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 transform;
-  }
-  .modern-button-danger {
-    @apply bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 transform;
-  }
-  .modern-input {
-    @apply w-full px-6 py-4 border-2 border-gray-200 bg-white/50 backdrop-blur-sm font-semibold text-lg rounded-2xl shadow-md focus:shadow-xl focus:border-blue-400 focus:ring-4 focus:ring-blue-100/50 outline-none transition-all duration-300;
-  }
-  .modern-heading {
-    @apply text-4xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-2xl;
-  }
-  .modern-nav {
-    @apply bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900/90 backdrop-blur-xl border-b border-white/20 shadow-2xl shadow-black/20;
-  }
+
+
+:root {
+  --black: #111;
+  --white: #fff;
+  --blue: #3b82f6;
+  --red: #ef4444;
+  --green: #22c55e;
+  --yellow: #ffec9e;
 }
 
-/* Enhanced Glassmorphism */
-.glass {
-  @apply backdrop-blur-2xl bg-white/20 border border-white/30 shadow-2xl rounded-3xl;
+body {
+  background: #f4f4f4;
+  font-family: system-ui, Arial, sans-serif;
 }
 
+/* CARD */
+.brutal-card {
+  background: white;
+  border: 4px solid black;
+  box-shadow: 8px 8px 0 black;
+  padding: 24px;
+  border-radius: 12px;
+}
 
+/* BUTTON */
+.brutal-btn {
+  border: 3px solid black;
+  box-shadow: 4px 4px 0 black;
+  padding: 10px 14px;
+  font-weight: 800;
+  transition: 0.1s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 black;
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 black;
+}
+
+.btn-blue { background: var(--blue); color: white; }
+.btn-red { background: var(--red); color: white; }
+.btn-green { background: var(--green); color: black; }
+.btn-yellow { background: var(--yellow); color: black; }
+
+/* INPUT */
+.brutal-input {
+  width: 100%;
+  padding: 10px;
+  border: 3px solid black;
+  box-shadow: 4px 4px 0 black;
+  outline: none;
+  font-weight: 600;
+}
+
+.brutal-input:focus {
+  transform: translate(-2px, -2px);
+}
+
+/* NAV */
+.brutal-nav {
+  background: #5dffbb;
+  border-bottom: 4px solid black;
+  box-shadow: 0 4px 0 black;
+}

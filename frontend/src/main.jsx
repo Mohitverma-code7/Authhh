@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { AuthProvider } from './context/AuthContext.jsx'
-import { AuthApp } from './components/Navbar.jsx'
+import { AuthProvider } from '../src/context/AuthContext.jsx'
+import { AuthApp } from '../src/components/Navbar.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

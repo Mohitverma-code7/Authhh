@@ -1,76 +1,117 @@
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import Dashboard from '../pages/Dashboard';
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
-import Profile from './Profile';
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import Dashboard from "../pages/Dashboard";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import Profile from "./Profile";
+
+/* ================= NAVBAR ================= */
 
 const Navbar = () => {
-  const { user, clearMessages, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
+  const { user, logout } = useAuth();
 
   return (
-    <nav className="modern-nav">
+    <nav className="bg-[#0077ff] border-b-4 border-black shadow-lg">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center h-20">
-          <h1 className="modern-heading text-3xl">AUTHH</h1>
-          
+
+          {/* Logo */}
+          <h1 className="text-3xl font-black tracking-tight">
+            ⚡ AUTHH
+          </h1>
+
           {user ? (
-            <div className="flex items-center space-x-4">
-              <span className="glass px-6 py-3 font-bold text-lg border-b-4 border-blue-600">
+            <div className="flex items-center gap-3">
+
+              {/* Username */}
+              <span className="bg-white border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black]">
                 {user.username}
               </span>
-              <a href="#dashboard" className="modern-button text-sm">🚀 Dashboard</a>
-              <button
-                onClick={handleLogout}
-                className="modern-button-danger text-sm"
+
+              {/* Dashboard */}
+              <a
+                href="#dashboard"
+                className="bg-blue-500 text-white border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black] hover:translate-x-1 hover:translate-y-1 transition"
               >
-                🚪 Logout
+                🚀 DASH
+              </a>
+
+              {/* Logout */}
+              <button
+                onClick={logout}
+                className="bg-red-500 text-white border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black] hover:translate-x-1 hover:translate-y-1 transition"
+              >
+                🚪 LOGOUT
               </button>
             </div>
           ) : (
-            <div className="flex items-center space-x-6">
-              <a href="#login" className="modern-button text-sm">🔐 Login</a>
-              <a href="#register" className="modern-button-secondary text-sm">➕ Register</a>
+            <div className="flex gap-3">
+
+              <a
+                href="#login"
+                className="bg-black text-white border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_white] hover:translate-x-1 hover:translate-y-1 transition"
+              >
+                🔐 LOGIN
+              </a>
+
+              <a
+                href="#register"
+                className="bg-green-400 text-black border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black] hover:translate-x-1 hover:translate-y-1 transition"
+              >
+                ➕ REGISTER
+              </a>
+
             </div>
           )}
+
         </div>
       </div>
     </nav>
   );
 };
 
+/* ================= MAIN APP ================= */
+
 const AuthApp = () => {
   const { user } = useAuth();
-  const [view, setView] = useState(user ? 'dashboard' : 'login');
+  const [view, setView] = useState(user ? "dashboard" : "login");
 
   const renderView = () => {
     switch (view) {
-      case 'dashboard':
+      case "dashboard":
         return <Dashboard />;
-      case 'login':
-        return <LoginForm onSwitch={() => setView('register')} />;
-      case 'register':
-        return <RegisterForm onSwitch={() => setView('login')} />;
-      case 'profile':
+      case "login":
+        return <LoginForm onSwitch={() => setView("register")} />;
+      case "register":
+        return <RegisterForm onSwitch={() => setView("login")} />;
+      case "profile":
         return <Profile />;
       default:
-        return user ? <Dashboard /> : <LoginForm onSwitch={() => setView('register')} />;
+        return user ? (
+          <Dashboard />
+        ) : (
+          <LoginForm onSwitch={() => setView("register")} />
+        );
     }
   };
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-        <div className="max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
-          <div className="modern-card">
+
+      <main className="min-h-screen bg-[linear-gradient(135deg,#fdfdfd,#f3f3f3)] flex items-center justify-center p-6">
+
+        <div className="w-full max-w-md">
+
+          {/* BRUTAL CARD */}
+          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_black] p-6">
+
             {renderView()}
+
           </div>
+
         </div>
+
       </main>
     </>
   );
@@ -78,5 +119,3 @@ const AuthApp = () => {
 
 export default AuthApp;
 export { AuthApp };
-
-
