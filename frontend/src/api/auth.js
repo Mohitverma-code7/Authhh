@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'https://authhh-paju.onrender.com';
 
 const api = axios.create({
   baseURL: API_BASE,
