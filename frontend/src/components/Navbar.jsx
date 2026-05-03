@@ -28,14 +28,6 @@ const Navbar = () => {
                 {user.username}
               </span>
 
-              {/* Dashboard */}
-              <a
-                href="#dashboard"
-                className="bg-blue-500 text-white border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black] hover:translate-x-1 hover:translate-y-1 transition"
-              >
-                🚀 DASH
-              </a>
-
               {/* Logout */}
               <button
                 onClick={logout}
