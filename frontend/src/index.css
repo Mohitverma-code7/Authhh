@@ -1,4 +1,36 @@
+/* Modern Clean Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .modern-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl rounded-3xl p-8;
+  }
+  .modern-button {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 transform;
+  }
+  .modern-button-secondary {
+    @apply bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 transform;
+  }
+  .modern-button-danger {
+    @apply bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 transform;
+  }
+  .modern-input {
+    @apply w-full px-6 py-4 border-2 border-gray-200 bg-white/50 backdrop-blur-sm font-semibold text-lg rounded-2xl shadow-md focus:shadow-xl focus:border-blue-400 focus:ring-4 focus:ring-blue-100/50 outline-none transition-all duration-300;
+  }
+  .modern-heading {
+    @apply text-4xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-2xl;
+  }
+  .modern-nav {
+    @apply bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900/90 backdrop-blur-xl border-b border-white/20 shadow-2xl shadow-black/20;
+  }
+}
+
+/* Enhanced Glassmorphism */
+.glass {
+  @apply backdrop-blur-2xl bg-white/20 border border-white/30 shadow-2xl rounded-3xl;
+}
+
+
 

@@ -3,21 +3,29 @@ import helmet from "helmet";
 import cors from "cors";
 import axios from "axios";
 
-const app = express(); // 🔥 THIS WAS MISSING
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+const API = "https://api.freeapi.app/api/v1";
 
 app.use(express.json());
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
 
-const API = "https://api.freeapi.app/api/v1";
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://your-frontend-domain.com"
+    ],
+    credentials: true,
+  })
+);
 
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
+        connectSrc: ["'self'", "https:", "http:"],
         fontSrc: ["'self'", "https:", "data:"],
         styleSrc: ["'self'", "'unsafe-inline'", "https:"],
         imgSrc: ["'self'", "data:", "https:"],
@@ -25,7 +33,6 @@ app.use(
     },
   })
 );
-
 
 // REGISTER
 app.post("/users/register", async (req, res) => {
@@ -41,7 +48,7 @@ app.post("/users/register", async (req, res) => {
 app.post("/users/login", async (req, res) => {
   try {
     const response = await axios.post(`${API}/users/login`, req.body, {
-      withCredentials: true
+      withCredentials: true,
     });
 
     res.setHeader("set-cookie", response.headers["set-cookie"] || []);
@@ -56,8 +63,8 @@ app.get("/users/current-user", async (req, res) => {
   try {
     const response = await axios.get(`${API}/users/current-user`, {
       headers: {
-        cookie: req.headers.cookie || ""
-      }
+        cookie: req.headers.cookie || "",
+      },
     });
 
     res.json(response.data);
@@ -69,11 +76,15 @@ app.get("/users/current-user", async (req, res) => {
 // LOGOUT
 app.post("/users/logout", async (req, res) => {
   try {
-    const response = await axios.post(`${API}/users/logout`, {}, {
-      headers: {
-        cookie: req.headers.cookie || ""
+    const response = await axios.post(
+      `${API}/users/logout`,
+      {},
+      {
+        headers: {
+          cookie: req.headers.cookie || "",
+        },
       }
-    });
+    );
 
     res.json(response.data);
   } catch (err) {
@@ -85,6 +96,6 @@ app.get("/", (req, res) => {
   res.send("Auth server is running 🚀");
 });
 
-app.listen(3000, () => {
-  console.log("✅ Server running on http://localhost:3000");
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });
