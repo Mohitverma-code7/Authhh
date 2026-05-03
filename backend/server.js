@@ -1,4 +1,5 @@
 import express from "express";
+import helmet from "helmet";
 import cors from "cors";
 import axios from "axios";
 
@@ -11,6 +12,20 @@ app.use(cors({
 }));
 
 const API = "https://api.freeapi.app/api/v1";
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        fontSrc: ["'self'", "https:", "data:"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https:"],
+        imgSrc: ["'self'", "data:", "https:"],
+      },
+    },
+  })
+);
+
 
 // REGISTER
 app.post("/users/register", async (req, res) => {
@@ -64,6 +79,10 @@ app.post("/users/logout", async (req, res) => {
   } catch (err) {
     res.status(err.response?.status || 500).json(err.response?.data);
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("Auth server is running 🚀");
 });
 
 app.listen(3000, () => {
