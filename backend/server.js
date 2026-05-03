@@ -2,7 +2,6 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import axios from "axios";
-import path from "path";
 
 const app = express();
 
@@ -11,9 +10,6 @@ const API = "https://api.freeapi.app/api/v1";
 
 app.use(express.json());
 
-/* =========================
-   CORS CONFIG
-========================= */
 app.use(
   cors({
     origin: [
@@ -24,9 +20,6 @@ app.use(
   })
 );
 
-/* =========================
-   SECURITY HEADERS
-========================= */
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -41,64 +34,42 @@ app.use(
   })
 );
 
-/* =========================
-   AUTH ROUTES (PROXY)
-========================= */
-
 // REGISTER
 app.post("/users/register", async (req, res) => {
   try {
-    const response = await axios.post(
-      `${API}/users/register`,
-      req.body
-    );
+    const response = await axios.post(`${API}/users/register`, req.body);
     res.json(response.data);
   } catch (err) {
-    res
-      .status(err.response?.status || 500)
-      .json(err.response?.data);
+    res.status(err.response?.status || 500).json(err.response?.data);
   }
 });
 
 // LOGIN
 app.post("/users/login", async (req, res) => {
   try {
-    const response = await axios.post(
-      `${API}/users/login`,
-      req.body,
-      { withCredentials: true }
-    );
+    const response = await axios.post(`${API}/users/login`, req.body, {
+      withCredentials: true,
+    });
 
-    res.setHeader(
-      "set-cookie",
-      response.headers["set-cookie"] || []
-    );
-
+    res.setHeader("set-cookie", response.headers["set-cookie"] || []);
     res.json(response.data);
   } catch (err) {
-    res
-      .status(err.response?.status || 500)
-      .json(err.response?.data);
+    res.status(err.response?.status || 500).json(err.response?.data);
   }
 });
 
 // CURRENT USER
 app.get("/users/current-user", async (req, res) => {
   try {
-    const response = await axios.get(
-      `${API}/users/current-user`,
-      {
-        headers: {
-          cookie: req.headers.cookie || "",
-        },
-      }
-    );
+    const response = await axios.get(`${API}/users/current-user`, {
+      headers: {
+        cookie: req.headers.cookie || "",
+      },
+    });
 
     res.json(response.data);
   } catch (err) {
-    res
-      .status(err.response?.status || 500)
-      .json(err.response?.data);
+    res.status(err.response?.status || 500).json(err.response?.data);
   }
 });
 
@@ -117,27 +88,13 @@ app.post("/users/logout", async (req, res) => {
 
     res.json(response.data);
   } catch (err) {
-    res
-      .status(err.response?.status || 500)
-      .json(err.response?.data);
+    res.status(err.response?.status || 500).json(err.response?.data);
   }
 });
 
-/* =========================
-   BASIC ROUTE
-========================= */
 app.get("/", (req, res) => {
   res.send("Auth server is running 🚀");
 });
-
-
-
-app.use(express.static("dist"));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("dist", "index.html"));
-});
-
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
