@@ -13,10 +13,10 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://your-frontend-domain.com"
-    ],
-    credentials: true,
+  "http://localhost:5173",
+  "https://authhh-pi.vercel.app"
+],
+credentials: true
   })
 );
 
